@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+* {
+    
+  scrollbar-width: none;
+  box-sizing: border-box;
+}
