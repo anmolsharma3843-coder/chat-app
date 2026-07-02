@@ -58,11 +58,8 @@ console.log(data)
       }
 
       if (isLogin) {
-  const cookie = await cookieStore.get("token");
-
-  if (cookie) {
-    onLogin(jwtDecode(cookie.value));
-  }
+  onLogin(data.user);
+}
 }else {
         alert("Account created successfully!");
         setIsLogin(true);
