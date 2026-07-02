@@ -46,20 +46,19 @@ const Auth = ({ onLogin }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include",
         body: JSON.stringify(payload),
       });
-
+      if (response.ok && data.token) {
+      localStorage.setItem("token", data.token);
+    }
       const data = await response.json();
 console.log(data)
       if (!response.ok) {
         throw new Error(data.message);
       }
 
-  
-
-  if (isLogin) {
-     onLogin(data.user);
+  if (data) {
+    onLogin(data.user);
   }
 else {
         alert("Account created successfully!");

@@ -1,9 +1,15 @@
 const BASE_URL = import.meta.env.VITE_BASE_URL;
+const getToken = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  return user?.token;
+};
 
 // Unread Counts
 export const getUnreadCounts = async () => {
   const res = await fetch(`${BASE_URL}/messages/unread-counts`, {
-    credentials: "include",
+    headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
   });
 
   const data = await res.json();
@@ -18,7 +24,9 @@ export const getPrivateMessages = async (userId) => {
   const res = await fetch(
     `${BASE_URL}/messages/private/${userId}`,
     {
-      credentials: "include",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
     }
   );
 
@@ -34,7 +42,9 @@ export const getGroupMessages = async (groupId) => {
   const res = await fetch(
     `${BASE_URL}/messages/group/${groupId}`,
     {
-      credentials: "include",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
     }
   );
 
@@ -51,7 +61,9 @@ export const editMessageApi = async (messageId, text) => {
     `${BASE_URL}/messages/${messageId}`,
     {
       method: "PATCH",
-      credentials: "include",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
       headers: {
         "Content-Type": "application/json",
       },
@@ -72,7 +84,9 @@ export const deleteMessageApi = async (messageId) => {
     `${BASE_URL}/messages/${messageId}`,
     {
       method: "DELETE",
-      credentials: "include",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
     }
   );
 
@@ -92,7 +106,9 @@ export const reactToMessageApi = async (
     `${BASE_URL}/messages/${messageId}/reaction`,
     {
       method: "PATCH",
-      credentials: "include",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
       headers: {
         "Content-Type": "application/json",
       },

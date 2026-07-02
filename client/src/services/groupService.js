@@ -1,11 +1,16 @@
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-
+const getToken = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  return user?.token;
+};
 // CREATE GROUP
 export const createGroup = async ( formdata ) => {
   try{
   const res = await fetch(`BASE_URL/groups`, {
     method: "POST",
-    credentials: "include",
+    headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
     body: formdata
   });
   if (!res.ok) {
@@ -25,7 +30,9 @@ export const createGroup = async ( formdata ) => {
 export const getGroups = async () => {
   try {
     const res = await fetch(`BASE_URL/groups`, {
-    credentials: "include",
+    headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
   });
 
   return await res.json();
@@ -44,7 +51,9 @@ export const getGroup = async (
     const res = await fetch(
     `${BASE_URL}/groups/${groupId}`,
     {
-      credentials: "include",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
     }
   );
 
@@ -66,7 +75,9 @@ export const addMember = async (
     `${BASE_URL}/groups/${groupId}/add`,
     {
       method: "PATCH",
-      credentials: "include",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
       headers: {
         "Content-Type":
           "application/json",
@@ -96,7 +107,9 @@ export const removeMember =
       `${BASE_URL}/groups/${groupId}/remove`,
       {
         method: "PATCH",
-        credentials: "include",
+        headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
         headers: {
           "Content-Type":
             "application/json",
@@ -124,7 +137,9 @@ export const leaveGroup = async (
     `${BASE_URL}/groups/${groupId}/leave`,
     {
       method: "PATCH",
-      credentials: "include",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
     }
   );
 
@@ -144,7 +159,9 @@ export const deleteGroup =
       `${BASE_URL}/groups/${groupId}`,
       {
         method: "DELETE",
-        credentials: "include",
+        headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
       }
     );
 
@@ -166,7 +183,9 @@ export const deleteGroup =
       `${BASE_URL}/groups/${groupId}`,
       {
         method: "PATCH",
-        credentials: "include",
+        headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
         body: formdata,
       }
     );

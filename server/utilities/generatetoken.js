@@ -14,9 +14,9 @@ const generatetoken=(user, res)=>{
     }
    );
    res.cookie('token',token,{
-    httpOnly: false,
-    sameSite: "Lax",   
-    secure: false,
+    httpOnly: true,
+    sameSite: "None",   
+    secure: true,
     maxAge: 5 * 24 * 60 * 60 * 1000, 
    })
 
