@@ -10,7 +10,7 @@ import {
   leaveGroup,
   deleteGroup,
  updateGroup
-} from "../controllers/groupController.js";
+} from "../Controllers/groupController.js";
 
 // import auth middleware
 import { isAuthenticated } from "../middleware/authMiddleware.js";
