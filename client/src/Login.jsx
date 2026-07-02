@@ -1,6 +1,5 @@
 
 import { useState } from "react";
-import { jwtDecode } from "jwt-decode";
 const Auth = ({ onLogin }) => {
   const [isLogin, setIsLogin] = useState(true);
 
@@ -57,13 +56,12 @@ console.log(data)
         throw new Error(data.message);
       }
 
-      if (isLogin) {
-  const cookie = await cookieStore.get("token");
+  
 
-  if (cookie) {
-    onLogin(jwtDecode(cookie.value));
+  if (isLogin) {
+     onLogin(data.user);
   }
-}else {
+else {
         alert("Account created successfully!");
         setIsLogin(true);
       }
