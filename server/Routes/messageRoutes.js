@@ -11,7 +11,7 @@ import {
   reactToMessage,
 } from "../Controllers/messageController.js";
 
-import { isAuthenticated } from "../middleware/authMiddleware.js";
+import {isAuthenticated} from '../middleware/authMiddleware.js'
 
 const router = express.Router();
 
