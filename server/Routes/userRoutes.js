@@ -10,7 +10,7 @@ import {
   getAllUsers,
 } from "../Controllers/userController.js";
 
-import { isAuthenticated } from "../middleware/authMiddleware.js";
+import { isAuthenticated } from "../middleware/authmiddleware.js";
 import {uploadProfile } from "../middleware/uploadMiddleware.js"
 const router = express.Router();
 

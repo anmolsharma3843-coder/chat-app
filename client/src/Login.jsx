@@ -32,8 +32,8 @@ const Auth = ({ onLogin }) => {
       setLoading(true);
 
       const url = isLogin
-        ? "http://localhost:4600/users/login"
-        : "http://localhost:4600/users/register";
+        ? `${import.meta.env.VITE_BASE_URL}/users/login`
+        : `${import.meta.env.VITE_BASE_URL}/users/register`;
 
       const payload = isLogin
         ? {
