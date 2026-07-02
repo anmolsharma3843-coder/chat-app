@@ -1,6 +1,6 @@
 import express from "express";
 import {User} from "../Models/User.js";
-import {Group }from "../models/Group.js";
+import {Group }from "../Models/Group.js";
 import { isAuthenticated } from "../middleware/authMiddleware.js";
 const router = express.Router();
 
