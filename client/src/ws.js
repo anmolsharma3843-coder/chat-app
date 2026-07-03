@@ -1,4 +1,4 @@
 import io from 'socket.io-client'
 export function CONNECTWS(){
-    return io('http://localhost:4600')
+    return io(import.meta.env.VITE_BASE_URL)
 }
