@@ -1,7 +1,6 @@
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const getToken = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  return user?.token;
+  return localStorage.getItem("token");
 };
 // CREATE GROUP
 export const createGroup = async ( formdata ) => {

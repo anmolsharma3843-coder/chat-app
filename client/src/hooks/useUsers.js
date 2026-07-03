@@ -2,14 +2,18 @@ import { useEffect, useState } from "react";
 
 export const useUsers = (userId) => {
   const [users, setUsers] = useState([]);
-
+const getToken = () => {
+  return localStorage.getItem("token");
+};
   useEffect(() => {
     const fetchUsers = async () => {
       try {
         const res = await fetch(
-          "http://localhost:4600/users",
+          `${import.meta.env.VITE_BASE_URL}/users`,
           {
-            credentials: "include",
+            headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
           }
         );
 
