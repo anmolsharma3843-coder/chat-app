@@ -18,7 +18,7 @@ const [groupImage, setGroupImage] = useState(null);
 const isAdmin = group.admin === currentUser._id || group.admin?._id === currentUser._id;
 const [preview, setPreview] = useState(
   group.groupImage
-    ? `http://localhost:4600${group.groupImage}`
+    ? `${import.meta.env.VITE_BASE_URL}${group.groupImage}`
     : ""
 );
 

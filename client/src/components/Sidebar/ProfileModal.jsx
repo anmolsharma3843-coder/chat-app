@@ -11,7 +11,7 @@ const [image, setImage] = useState( null);
   const [darkMode, setDarkMode] = useState(false)
 const [preview, setPreview] = useState(
   user.profileImage
-    ? `http://localhost:4600${user.profileImage}`
+    ? `${import.meta.env.VITE_BASE_URL}${user.profileImage}`
     : ""
 );
  const toggleTheme = () => {
@@ -32,7 +32,7 @@ const [preview, setPreview] = useState(
   formData.append("profileImage", image);
 }
       const res = await fetch(
-        "http://localhost:4600/users/profile",
+        `${import.meta.env.VITE_BASE_URL}/users/profile`,
         {
           method: "PATCH",
           credentials: "include",
@@ -41,7 +41,6 @@ const [preview, setPreview] = useState(
       );
 
       const data = await res.json();
-console.log(data)
       if (data.success) {
         onProfileUpdated(data.user);
         onClose();
