@@ -1,7 +1,6 @@
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 const getToken = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  return user?.token;
+  return localStorage.getItem("token")
 };
 
 // Unread Counts
@@ -62,10 +61,8 @@ export const editMessageApi = async (messageId, text) => {
     {
       method: "PATCH",
       headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-      headers: {
         "Content-Type": "application/json",
+         Authorization: `Bearer ${getToken()}`,
       },
       body: JSON.stringify({ text }),
     }
@@ -107,10 +104,8 @@ export const reactToMessageApi = async (
     {
       method: "PATCH",
       headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-      headers: {
         "Content-Type": "application/json",
+         Authorization: `Bearer ${getToken()}`,
       },
       body: JSON.stringify({ emoji }),
     }
