@@ -41,29 +41,30 @@ const Auth = ({ onLogin }) => {
           }
         : formData;
 
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-      if (response.ok && data.token) {
-      localStorage.setItem("token", data.token);
-    }
-      const data = await response.json();
-console.log(data)
-      if (!response.ok) {
-        throw new Error(data.message);
-      }
+ const response = await fetch(url, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(payload),
+});
 
-  if (data) {
-    onLogin(data.user);
-  }
-else {
-        alert("Account created successfully!");
-        setIsLogin(true);
-      }
+const data = await response.json();
+
+if (response.ok && data.token) {
+  localStorage.setItem("token", data.token);
+}
+
+if (!response.ok) {
+  throw new Error(data.message);
+}
+
+if (data.user) {
+  onLogin(data.user);
+} else {
+  alert("Account created successfully!");
+  setIsLogin(true);
+}
     } catch (error) {
       alert(error.message || "Something went wrong");
     } finally {
