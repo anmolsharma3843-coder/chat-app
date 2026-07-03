@@ -7,11 +7,7 @@ import { IoIosSearch } from "react-icons/io";
 
 import ProfileModal from "./ProfileModal";
 
-const Sidebar = ({
-  currentUser,
-  setCurrentUser,
-  ...props
-}) => {
+const Sidebar = ({ currentUser, setCurrentUser, ...props }) => {
 
   const [show, setshow] = useState(false)
   const [showCreateGroup, setShowCreateGroup] = useState(false);
@@ -40,7 +36,9 @@ useEffect(() => {
 useEffect(() => {
   const searching = async (searchdebounce) => {
     if (searchdebounce.length > 0) {
-      const res = await fetch(`http://localhost:4600/search?q=${searchdebounce}`, { credentials: "include" });
+      const res = await fetch(`${import.meta.env.VITE_BASE_URL}/search?q=${searchdebounce}`, { headers: {
+        Authorization: `Bearer ${getToken()}`,
+      } });
       const data = await res.json();
       setResults(data); // <-- store results here
     } else {
@@ -75,7 +73,7 @@ useEffect(() => {
     >
       {currentUser?.profileImage ? (
         <img
-          src={`http://localhost:4600${currentUser.profileImage}`}
+          src={`${import.meta.env.VITE_BASE_URL}${currentUser.profileImage}`}
           alt=""
           className="w-9 h-9 rounded-full object-cover"
         />
@@ -131,7 +129,7 @@ useEffect(() => {
             <div className="relative shrink-0">
         {u?.profileImage ? (
         <img
-          src={`http://localhost:4600${u.profileImage}`}
+          src={`${import.meta.env.VITE_BASE_URL}${u.profileImage}`}
           alt=""
           className="w-12 h-12 rounded-full object-cover"
         />
@@ -172,7 +170,7 @@ useEffect(() => {
             <div className="relative shrink-0">
               {g?.groupImage ? (
                 <img
-                  src={`http://localhost:4600${g.groupImage}`}
+                  src={`${import.meta.env.VITE_BASE_URL}${g.groupImage}`}
                   alt=""
                   className="w-12 h-12 rounded-full object-cover"
                 />) : (

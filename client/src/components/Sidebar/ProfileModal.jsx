@@ -121,7 +121,7 @@ const [preview, setPreview] = useState(
           </button>
 
           <button
-            onClick={saveProfile}
+            onClick={()=>saveProfile}
             className="px-5 py-2 rounded-lg bg-green-500 text-white"
           >
             Save
