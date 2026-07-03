@@ -4,8 +4,8 @@ import ChatApp from "./ChatApp";
 import { jwtDecode } from "jwt-decode";
 
 function App() {
-  const [user, setUser] = useState(null);
-
+  const [user, setUser] = useState(localStorage.getItem("token") || null);
+    
   return (
     <>
       {user ? <ChatApp user={user} /> : <Login onLogin={setUser} />}
