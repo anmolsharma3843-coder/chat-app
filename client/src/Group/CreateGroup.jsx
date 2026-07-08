@@ -33,7 +33,7 @@ const [preview, setPreview] = useState("");
     }
 
     const data = await createGroup(formData);
-
+    
     onGroupCreated(data);
 
     setShowCreateGroup(false);

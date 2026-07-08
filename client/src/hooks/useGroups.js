@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getGroup } from "../services/groupService";
+import { getGroups } from "../services/groupService";
 
 export const useGroups = () => {
   const [groups, setGroups] = useState([]);
@@ -7,7 +7,7 @@ export const useGroups = () => {
   useEffect(() => {
     const fetchGroups = async () => {
       try {
-        const data = await getGroup();
+        const data = await getGroups();
         console.log(data)
         if (Array.isArray(data)) {
           setGroups(data);
