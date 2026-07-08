@@ -34,7 +34,6 @@ const [preview, setPreview] = useState(
   formData.append("profileImage", image);
 }
      const token = localStorage.getItem("token");
-     console.log(jwtDecode(localStorage.getItem("token")));
 
 const res = await fetch(
   `${import.meta.env.VITE_BASE_URL}/users/profile`,
@@ -49,8 +48,7 @@ const res = await fetch(
 
       const data = await res.json();
 
-console.log(res.status);
-console.log(data);
+
       if (data.success) {
         onProfileUpdated(data.user);
         onClose();
