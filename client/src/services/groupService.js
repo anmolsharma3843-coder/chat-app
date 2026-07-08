@@ -5,7 +5,7 @@ const getToken = () => {
 // CREATE GROUP
 export const createGroup = async ( formdata ) => {
   try{
-  const res = await fetch(`BASE_URL/groups`, {
+  const res = await fetch(`${BASE_URL}/groups`, {
     method: "POST",
     headers: {
         Authorization: `Bearer ${getToken()}`,
@@ -28,7 +28,7 @@ export const createGroup = async ( formdata ) => {
 // GET ALL GROUPS
 export const getGroups = async () => {
   try {
-    const res = await fetch(`BASE_URL/groups`, {
+    const res = await fetch(`${BASE_URL}/groups`, {
     headers: {
         Authorization: `Bearer ${getToken()}`,
       },
