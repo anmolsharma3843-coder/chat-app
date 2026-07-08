@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CiDark } from "react-icons/ci";
 import { CiLight } from "react-icons/ci";
+import { jwtDecode } from "jwt-decode";
 const ProfileModal = ({
   user,
   onClose,
