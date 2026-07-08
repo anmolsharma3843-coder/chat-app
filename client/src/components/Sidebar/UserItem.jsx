@@ -5,6 +5,7 @@ const UserItem = ({
   onClick,
   unreadCounts,
 }) => {
+  console.log(user)
   return (
     <div
       onClick={onClick}

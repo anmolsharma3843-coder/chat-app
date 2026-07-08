@@ -25,7 +25,6 @@ const [preview, setPreview] = useState(
     localStorage.setItem("theme", next ? "dark" : "light");
   };
   const saveProfile = async () => {
-    console.log("clicked")
     try {
       const formData= new FormData();
       
