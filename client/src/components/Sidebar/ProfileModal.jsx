@@ -14,7 +14,6 @@ const [preview, setPreview] = useState(
     ? `${import.meta.env.VITE_BASE_URL}${user.profileImage}`
     : ""
 );
-console.log(user)
  const toggleTheme = () => {
     const next = !darkMode;
 
@@ -123,7 +122,7 @@ console.log(user)
           </button>
 
           <button
-            onClick={()=>saveProfile}
+            onClick={saveProfile}
             className="px-5 py-2 rounded-lg bg-green-500 text-white"
           >
             Save
