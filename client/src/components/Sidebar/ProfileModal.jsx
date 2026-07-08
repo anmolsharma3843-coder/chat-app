@@ -32,14 +32,18 @@ const [preview, setPreview] = useState(
       if (image) {
   formData.append("profileImage", image);
 }
-      const res = await fetch(
-        `${import.meta.env.VITE_BASE_URL}/users/profile`,
-        {
-          method: "PATCH",
-          credentials: "include",
-          body: formData,
-        }
-      );
+     const token = localStorage.getItem("token");
+
+const res = await fetch(
+  `${import.meta.env.VITE_BASE_URL}/users/profile`,
+  {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  }
+);
 
       const data = await res.json();
       if (data.success) {
