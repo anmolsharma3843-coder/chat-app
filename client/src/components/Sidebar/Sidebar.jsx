@@ -37,7 +37,7 @@ useEffect(() => {
   const searching = async (searchdebounce) => {
     if (searchdebounce.length > 0) {
       const res = await fetch(`${import.meta.env.VITE_BASE_URL}/search?q=${searchdebounce}`, { headers: {
-        Authorization: `Bearer ${getToken()}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       } });
       const data = await res.json();
       setResults(data); // <-- store results here
