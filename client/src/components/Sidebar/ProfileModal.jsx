@@ -14,6 +14,7 @@ const [preview, setPreview] = useState(
     ? `${import.meta.env.VITE_BASE_URL}${user.profileImage}`
     : ""
 );
+console.log(user)
  const toggleTheme = () => {
     const next = !darkMode;
 
