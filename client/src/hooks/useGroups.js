@@ -8,7 +8,7 @@ export const useGroups = () => {
     const fetchGroups = async () => {
       try {
         const data = await getGroup();
-
+        console.log(data)
         if (Array.isArray(data)) {
           setGroups(data);
         } else if (data.groups) {
