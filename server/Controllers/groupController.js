@@ -1,7 +1,7 @@
 // controllers/groupController.js
 
 import { Group } from "../Models/Group.js";
-import cloudinary from "../Config/cloudinary.js";
+import cloudinary from "../config/cloudinary.js";
 import fs from "fs";
 
 // CREATE GROUP
