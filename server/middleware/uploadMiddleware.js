@@ -19,7 +19,7 @@ const fileFilter = (req, file, cb) => {
 
 const profileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/profiles");
+    cb(null, "uploads/profile");
   },
   filename: (req, file, cb) => {
     cb(null, `profile-${Date.now()}${path.extname(file.originalname)}`);
@@ -28,7 +28,7 @@ const profileStorage = multer.diskStorage({
 
 const productStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/products");
+    cb(null, "uploads/group");
   },
   filename: (req, file, cb) => {
     cb(null, `product-${Date.now()}${path.extname(file.originalname)}`);
