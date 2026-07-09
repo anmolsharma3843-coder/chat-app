@@ -5,6 +5,7 @@ const UserItem = ({
   onClick,
   unreadCounts,
 }) => {
+  console.log(user)
   return (
     <div
       onClick={onClick}
@@ -21,7 +22,7 @@ const UserItem = ({
     >
       {/* Avatar */}
       <div className="relative shrink-0">
-        {user ? (
+        {user?.profileImage ? (
         <img
           src={user.profileImage}
           alt="user"
