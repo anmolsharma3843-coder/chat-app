@@ -67,10 +67,10 @@ const ChatApp = ({ user }) => {
   const handleBack = () => {
     setShowChat(false);
   };
-  
+
 
   return (
-    <div className="h-screen bg-slate-100 flex overflow-hidden">
+    <div className="h-[100dvh] bg-slate-100 flex overflow-hidden">
       {/* Sidebar */}
       <div
         className={`
@@ -90,19 +90,15 @@ const ChatApp = ({ user }) => {
           setCurrentUser={setCurrentUser}
           onGroupCreated={handleGroupCreated}
           unreadCounts={unreadCounts}
-           onLeaveGroup={handleLeaveGroup}
+          onLeaveGroup={handleLeaveGroup}
         />
       </div>
 
       {/* Chat Area */}
       <div
         className={`
-          ${showChat ? "flex" : "hidden md:flex"}
-          flex-1
-          flex-col
-          min-w-0
-        `}
-      >
+    ${showChat ? "flex" : "hidden md:flex"}
+    flex-1 flex-col min-w-0 h-full overflow-hidden `} >
         {!selectedUser && !selectedGroup ? (
           <div className="flex-1 flex items-center justify-center bg-slate-200 dark:bg-gray-700">
             <div className="text-center">
@@ -139,7 +135,7 @@ const ChatApp = ({ user }) => {
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 min-h-0">
               <MessageList
                 messages={currentConversation}
                 currentUserId={currentuser._id}
@@ -152,7 +148,7 @@ const ChatApp = ({ user }) => {
             </div>
 
             {/* Input */}
-            <div className="bg-white border-t border-slate-200">
+           <div className="shrink-0 bg-white border-t border-slate-200">
               <MessageInput
                 input={input}
                 setInput={setInput}
