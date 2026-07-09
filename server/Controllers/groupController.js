@@ -6,12 +6,19 @@ import { Group } from "../Models/Group.js";
 // CREATE GROUP
 export const createGroup = async (req, res) => {
   try {
-    const { groupName, members = [] } = req.body;
+    const { groupName } = req.body;
+
+    let members = req.body.members || [];
+
+    // Convert single member to array
+    if (!Array.isArray(members)) {
+      members = [members];
+    }
 
     const group = await Group.create({
       groupName,
-      admin: req.user.id,
-      members: [...new Set([req.user.id, ...members])],
+      admin: req.user._id,
+      members: [...new Set([req.user._id.toString(), ...members])],
       groupImage: req.file
         ? `/uploads/group/${req.file.filename}`
         : "",
