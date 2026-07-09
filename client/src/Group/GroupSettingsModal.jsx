@@ -15,7 +15,7 @@ const GroupSettingsModal = ({
   const [selectedMember, setSelectedMember] = useState("");
   const [groupImage, setGroupImage] = useState(null);
   const isAdmin = group.admin === currentUser._id || group.admin?._id === currentUser._id;
-  const [preview, setPreview] = useState(group.groupImage || "");
+  const [preview, setPreview] = useState( group.groupImage ? `${import.meta.env.VITE_BASE_URL}${group.groupImage}` : "" );
 
   // Local state for instant UI updates
   const [members, setMembers] = useState(group.members || []);
