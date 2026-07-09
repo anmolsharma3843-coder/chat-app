@@ -4,6 +4,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { User } from "../Models/User.js";
 import { generatetoken } from "../utilities/generatetoken.js";
+import cloudinary from "../config/cloudinary.js";
+import fs from "fs";
 
 
 // Register User
@@ -11,7 +13,7 @@ export const registerUser = async (req, res) => {
   console.log(req.body)
   try {
     const { username, email, password } = req.body;
- 
+
     // Validation
     if (!username || !email || !password) {
       return res.status(400).json({
@@ -22,7 +24,7 @@ export const registerUser = async (req, res) => {
 
     // Check existing user
     const existingUser = await User.findOne({ email });
- 
+
     if (existingUser) {
       return res.status(400).json({
         success: false,
@@ -34,11 +36,11 @@ export const registerUser = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create user
-   const newUser = await User.create({
-    username,
-    email,
-    password: hashedPassword,
-  });
+    const newUser = await User.create({
+      username,
+      email,
+      password: hashedPassword,
+    });
 
 
     res.status(201).json({
@@ -94,12 +96,12 @@ export const loginUser = async (req, res) => {
 
     // Generate token
     const token = generatetoken(user, res)
-res.status(200).json({
-  success: true,
-  message: "Login Successful",
-  user,
-  token
-});
+    res.status(200).json({
+      success: true,
+      message: "Login Successful",
+      user,
+      token
+    });
   } catch (error) {
     console.error(error);
 
@@ -150,7 +152,6 @@ export const getProfile = async (req, res) => {
 };
 
 // Update Profile
-// Update Profile
 export const updateProfile = async (req, res) => {
   try {
     const { username } = req.body;
@@ -171,7 +172,16 @@ export const updateProfile = async (req, res) => {
 
     // Update profile image if uploaded
     if (req.file) {
-      user.profileImage = `/uploads/profile/${req.file.filename}`;
+      const result = await cloudinary.uploader.upload(
+        req.file.path,
+        {
+          folder: "profile",
+        }
+      );
+
+      // Remove local file after successful upload
+      fs.unlinkSync(req.file.path);
+      user.profileImage = result.secure_url;
     }
 
     await user.save();

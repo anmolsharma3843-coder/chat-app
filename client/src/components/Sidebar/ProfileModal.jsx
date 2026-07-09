@@ -10,11 +10,7 @@ const ProfileModal = ({
   const [username, setUsername] = useState(user.username);
 const [image, setImage] = useState( null);
   const [darkMode, setDarkMode] = useState(false)
-const [preview, setPreview] = useState(
-  user.profileImage
-    ? `${import.meta.env.VITE_BASE_URL}${user.profileImage}`
-    : ""
-);
+const [preview, setPreview] = useState( user.profileImage || "" );
  const toggleTheme = () => {
     const next = !darkMode;
 

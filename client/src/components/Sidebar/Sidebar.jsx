@@ -129,7 +129,7 @@ useEffect(() => {
             <div className="relative shrink-0">
         {u?.profileImage ? (
         <img
-          src={`${import.meta.env.VITE_BASE_URL}${u.profileImage}`}
+          src={u.profileImage}
           alt=""
           className="w-12 h-12 rounded-full object-cover"
         />
@@ -170,7 +170,7 @@ useEffect(() => {
             <div className="relative shrink-0">
               {g?.groupImage ? (
                 <img
-                  src={`${import.meta.env.VITE_BASE_URL}${g.groupImage}`}
+                  src={g.groupImage}
                   alt=""
                   className="w-12 h-12 rounded-full object-cover"
                 />) : (

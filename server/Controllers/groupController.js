@@ -1,7 +1,8 @@
 // controllers/groupController.js
 
 import { Group } from "../Models/Group.js";
-
+import cloudinary from "../Config/cloudinary.js";
+import fs from "fs";
 
 // CREATE GROUP
 export const createGroup = async (req, res) => {
@@ -14,13 +15,22 @@ export const createGroup = async (req, res) => {
     if (!Array.isArray(members)) {
       members = [members];
     }
+    
+     const result = await cloudinary.uploader.upload(
+      req.file.path,
+      {
+        folder: "group",
+      }
+    );
 
+    // Remove local file after successful upload
+    fs.unlinkSync(req.file.path);
     const group = await Group.create({
       groupName,
       admin: req.user._id,
       members: [...new Set([req.user._id.toString(), ...members])],
       groupImage: req.file
-        ? `/uploads/group/${req.file.filename}`
+        ? result.secure_url
         : "",
     });
 
@@ -205,7 +215,12 @@ export const updateGroup = async (req, res) => {
 
     // Update group image
     if (req.file) {
-      group.groupImage = `/uploads/group/${req.file.filename}`;
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "group",
+      });
+
+      fs.unlinkSync(req.file.path);
+      group.groupImage = result.secure_url;;
     }
 
     await group.save();

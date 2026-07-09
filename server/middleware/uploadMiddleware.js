@@ -1,8 +1,13 @@
 import multer from "multer";
 import path from "path";
+import fs from "fs";
+
+fs.mkdirSync("uploads/profile", { recursive: true });
+fs.mkdirSync("uploads/group", { recursive: true });
 
 const fileFilter = (req, file, cb) => {
   const allowedTypes = /jpeg|jpg|png|webp/;
+
   const ext = path.extname(file.originalname).toLowerCase();
 
   if (allowedTypes.test(ext)) {
@@ -12,31 +17,30 @@ const fileFilter = (req, file, cb) => {
   }
 };
 
-const profilestorage = multer.diskStorage({
+const profileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/profile");
+    cb(null, "uploads/profiles");
   },
-
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
+    cb(null, `profile-${Date.now()}${path.extname(file.originalname)}`);
   },
 });
-const groupProfilestorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/group");
-  },
 
+const productStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/products");
+  },
   filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
+    cb(null, `product-${Date.now()}${path.extname(file.originalname)}`);
   },
 });
 
 export const uploadProfile = multer({
-  storage: profilestorage,
+  storage: profileStorage,
   fileFilter,
 });
 
-export const uploadGroupProfile = multer({
-  storage: groupProfilestorage,
+export const uploadProduct = multer({
+  storage: productStorage,
   fileFilter,
 });
