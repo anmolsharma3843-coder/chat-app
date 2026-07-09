@@ -24,7 +24,7 @@ const UserItem = ({
       <div className="relative shrink-0">
         {user?.profileImage ? (
         <img
-          src={user.profileImage}
+          src={`${import.meta.env.VITE_BASE_URL}${user.profileImage}`}
           alt="user"
           className="w-12 h-12 rounded-full object-cover"
         />
