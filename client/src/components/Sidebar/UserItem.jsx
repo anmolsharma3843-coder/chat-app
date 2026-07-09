@@ -21,10 +21,10 @@ const UserItem = ({
     >
       {/* Avatar */}
       <div className="relative shrink-0">
-        {user?.profileImage ? (
+        {user ? (
         <img
           src={user.profileImage}
-          alt=""
+          alt="user"
           className="w-12 h-12 rounded-full object-cover"
         />
       ) : (
