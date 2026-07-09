@@ -19,7 +19,7 @@ export const sendPrivateMessage = async (req, res) => {
       sender: req.user._id,
       receiver,
       text,
-       status: "sent",
+      status: "sent",
     });
 
     res.status(201).json({
@@ -55,10 +55,11 @@ export const getPrivateMessages = async (req, res) => {
       ],
     })
       .sort({ createdAt: 1 })
-     .populate("sender", "username")
-.populate("receiver", "username")
-.populate("replyTo", "text")
-.populate("reactions.user", "username");
+      .populate("sender", "username")
+      .populate("receiver", "username")
+      .populate("replyTo", "text")
+      .populate("reactions.user", "username");
+      
 
     res.status(200).json({
       success: true,
@@ -118,8 +119,8 @@ export const getGroupMessages = async (req, res) => {
     })
       .sort({ createdAt: 1 })
       .populate("sender", "username")
-.populate("replyTo", "text")
-.populate("reactions.user", "username");
+      .populate("replyTo", "text")
+      .populate("reactions.user", "username");
 
     res.status(200).json({
       success: true,
@@ -134,7 +135,7 @@ export const getGroupMessages = async (req, res) => {
     });
   }
 };
-export const getUnreadCounts = async ( req, res ) => {
+export const getUnreadCounts = async (req, res) => {
   try {
     const userId = req.user._id;
 
@@ -202,16 +203,12 @@ export const editMessage = async (req, res) => {
     message.edited = true;
 
     await message.save();
-
-    await message.populate("sender", "username")
-.populate("replyTo", "text")
-.populate("reactions.user", "username");
-    await message.populate("receiver", "username");
-    await message.populate("replyTo", "text");
-await message.populate(
-  "reactions.user",
-  "username"
-);
+    await message.populate([
+      { path: "sender", select: "username" },
+      { path: "receiver", select: "username" },
+      { path: "replyTo", select: "text" },
+      { path: "reactions.user", select: "username" },
+    ]);
     res.status(200).json({
       success: true,
       message,
@@ -255,15 +252,17 @@ export const deleteMessage = async (req, res) => {
 
     await message.save();
 
-await message.populate("sender", "username");
-await message.populate("receiver", "username");
-await message.populate("replyTo", "text");
-await message.populate("reactions.user", "username");
+    await message.populate([
+  { path: "sender", select: "username" },
+  { path: "receiver", select: "username" },
+  { path: "replyTo", select: "text" },
+  { path: "reactions.user", select: "username" },
+]);
 
-res.status(200).json({
-  success: true,
-  message,
-});
+    res.status(200).json({
+      success: true,
+      message,
+    });
   } catch (error) {
     console.error(error);
 
@@ -305,10 +304,12 @@ export const reactToMessage = async (req, res) => {
 
     await message.save();
 
-   await message.populate("sender", "username");
-await message.populate("receiver", "username");
-await message.populate("replyTo", "text");
-await message.populate("reactions.user", "username");
+    await message.populate([
+  { path: "sender", select: "username" },
+  { path: "receiver", select: "username" },
+  { path: "replyTo", select: "text" },
+  { path: "reactions.user", select: "username" },
+]);
 
     res.status(200).json({
       success: true,
