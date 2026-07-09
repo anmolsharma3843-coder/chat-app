@@ -27,7 +27,7 @@ const GroupList = ({
             <div className="relative shrink-0">
               {g?.groupImage ? (
                 <img
-                  src={`http://localhost:4600${g.groupImage}`}
+                  src={`${import.meta.env.VITE_BASE_URL}${g.groupImage}`}
                   alt=""
                   className="w-12 h-12 rounded-full object-cover"
                 />) : (
