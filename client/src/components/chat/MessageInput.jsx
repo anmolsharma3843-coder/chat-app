@@ -69,7 +69,7 @@ const MessageInput = ({
         />
 
         <button
-          onClick={sendMessage}
+          onClick={sendMessage(input, setInput)}
           disabled={!input.trim()}
           className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center text-lg hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
         >
