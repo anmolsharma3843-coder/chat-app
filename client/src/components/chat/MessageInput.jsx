@@ -23,7 +23,16 @@ const MessageInput = ({
   );
 
   return (
-    <div className="bg-white border-t border-slate-200 p-4 dark:bg-gray-700">
+    <div className="
+bg-white
+dark:bg-gray-800
+border-t
+border-slate-200
+dark:border-gray-700
+px-3
+py-3
+sm:px-5
+">
 
       {replyMessage && (
         <div className="mb-3 bg-slate-100 dark:bg-slate-800 border-l-4 border-blue-500 rounded-lg p-3 flex items-start justify-between">
@@ -48,7 +57,7 @@ const MessageInput = ({
         </div>
       )}
 
-      <div className="flex items-center gap-3">
+    <div className="flex items-end gap-2">
         <input
           type="text"
           value={input}
@@ -65,13 +74,38 @@ const MessageInput = ({
               ? "Write a reply..."
               : "Type a message..."
           }
-          className="flex-1 px-5 py-3 rounded-full bg-slate-100 dark:bg-slate-200 outline-none focus:ring-2 focus:bg-slate-100 focus:ring-blue-500 text-sm"
+          className="
+flex-1
+rounded-3xl
+border
+border-slate-300
+bg-slate-100
+dark:bg-gray-600
+dark:text-white
+px-5
+py-3
+outline-none
+focus:border-blue-500
+"
         />
 
         <button
           onClick={()=>sendMessage(input, setInput)}
           disabled={!input.trim()}
-          className="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center text-lg hover:bg-blue-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+         className="
+w-12
+h-12
+rounded-full
+bg-blue-600
+hover:bg-blue-700
+active:scale-95
+transition
+text-white
+flex
+items-center
+justify-center
+disabled:opacity-50
+"
         >
           ➤
         </button>

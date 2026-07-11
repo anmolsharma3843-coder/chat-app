@@ -258,7 +258,7 @@ useEffect(() => {
           </h3>
         </div>
 
-        <div className="px-2">
+        <div className="flex-1 overflow-y-auto">
           <UserList {...props} unreadCounts={props.unreadCounts} />
         </div>
       </div>}</>)}

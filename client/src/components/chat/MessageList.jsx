@@ -14,7 +14,18 @@ const MessageList = ({
     messagesEndRef.current?.scrollIntoView({behavior:'smooth'})
   },[messages])
   return (
-   <div className="flex-1 overflow-y-auto px-4 py-6 space-y-4 bg-slate-200 dark:bg-gray-700">
+  <div
+    className="
+    h-full
+    overflow-y-auto
+    px-3
+    sm:px-5
+    py-4
+    space-y-3
+    bg-slate-200
+    dark:bg-gray-700
+    "
+>
   {messages.length === 0 ? (
     <div className="h-full flex items-center justify-center">
       <p className="text-slate-500 dark:text-slate-300">No Messages Yet 👋</p>

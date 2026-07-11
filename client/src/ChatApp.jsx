@@ -70,16 +70,19 @@ const ChatApp = ({ user }) => {
 
 
   return (
-    <div className="h-[100dvh] flex bg-slate-100 dark:bg-gray-900">
+    <div className="h-[100dvh] flex bg-slate-100 dark:bg-gray-900 overflow-hidden">
   {/* Sidebar */}
   <aside
-    className={`
-      ${showChat ? "hidden md:flex" : "flex"}
-      w-full md:w-[320px] flex-shrink-0 bg-white dark:bg-gray-800
-      border-r border-slate-200 dark:border-gray-700
-      transition-all duration-300
-    `}
-  >
+  className={`
+    ${showChat ? "hidden md:flex" : "flex"}
+    w-full md:w-[340px]
+    flex-col
+    flex-shrink-0
+    overflow-hidden
+    bg-white dark:bg-gray-800
+    border-r border-slate-200 dark:border-gray-700
+  `}
+>
     <Sidebar
       users={users}
       groups={groups}
@@ -119,7 +122,20 @@ const ChatApp = ({ user }) => {
     ) : (
       <>
         {/* Header */}
-        <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-slate-200 dark:border-gray-700">
+        <header
+className="
+h-16
+flex
+items-center
+bg-white
+dark:bg-gray-800
+border-b
+border-slate-200
+dark:border-gray-700
+shadow-sm
+shrink-0
+"
+>
           <ChatHeader
             selectedUser={selectedUser}
             selectedGroup={selectedGroup}
@@ -131,7 +147,7 @@ const ChatApp = ({ user }) => {
         </header>
 
         {/* Messages */}
-        <section className="flex-1 overflow-y-auto scroll-smooth snap-y">
+       <section className="flex-1 min-h-0 overflow-hidden">
           <MessageList
             messages={currentConversation}
             currentUserId={currentuser._id}
