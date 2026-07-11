@@ -70,102 +70,97 @@ const ChatApp = ({ user }) => {
 
 
   return (
-    <div className="h-[100dvh] bg-slate-100 flex overflow-hidden">
-      {/* Sidebar */}
-      <div
-        className={`
-          ${showChat ? "hidden md:block" : "block"}
-          w-full md:w-[320px] bg-white md:border-r border-slate-200 shadow-md
-        `}
-      >
-        <Sidebar
-          users={users}
-          groups={groups}
-          onlineUsers={onlineUsers}
-          selectedUser={selectedUser}
-          selectedGroup={selectedGroup}
-          handleSelectUser={selectUser}
-          handleSelectGroup={selectGroup}
-          currentUser={currentuser}
-          setCurrentUser={setCurrentUser}
-          onGroupCreated={handleGroupCreated}
-          unreadCounts={unreadCounts}
-          onLeaveGroup={handleLeaveGroup}
-        />
+    <div className="h-[100dvh] flex bg-slate-100 dark:bg-gray-900">
+  {/* Sidebar */}
+  <aside
+    className={`
+      ${showChat ? "hidden md:flex" : "flex"}
+      w-full md:w-[320px] flex-shrink-0 bg-white dark:bg-gray-800
+      border-r border-slate-200 dark:border-gray-700
+      transition-all duration-300
+    `}
+  >
+    <Sidebar
+      users={users}
+      groups={groups}
+      onlineUsers={onlineUsers}
+      selectedUser={selectedUser}
+      selectedGroup={selectedGroup}
+      handleSelectUser={selectUser}
+      handleSelectGroup={selectGroup}
+      currentUser={currentuser}
+      setCurrentUser={setCurrentUser}
+      onGroupCreated={handleGroupCreated}
+      unreadCounts={unreadCounts}
+      onLeaveGroup={handleLeaveGroup}
+    />
+  </aside>
+
+  {/* Chat Area */}
+  <main
+    className={`
+      ${showChat ? "flex" : "hidden md:flex"}
+      flex-1 flex-col min-w-0 h-full overflow-hidden
+      transition-all duration-300
+    `}
+  >
+    {!selectedUser && !selectedGroup ? (
+      <div className="flex-1 flex items-center justify-center">
+        <div className="text-center px-6">
+          <div className="text-6xl mb-4">💬</div>
+          <h1 className="text-2xl font-bold text-slate-700 dark:text-slate-100">
+            Welcome to ChatApp
+          </h1>
+          <p className="text-slate-500 mt-2 dark:text-slate-300">
+            Select a user or group to start chatting
+          </p>
+        </div>
       </div>
+    ) : (
+      <>
+        {/* Header */}
+        <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-slate-200 dark:border-gray-700">
+          <ChatHeader
+            selectedUser={selectedUser}
+            selectedGroup={selectedGroup}
+            onlineUsers={onlineUsers}
+            typing={typing}
+            groupTyping={groupTyping}
+            handleBack={handleBack}
+          />
+        </header>
 
-      {/* Chat Area */}
-      <div
-        className={`
-    ${showChat ? "flex" : "hidden md:flex"}
-    flex-1 flex-col min-w-0 h-full overflow-hidden `} >
-        {!selectedUser && !selectedGroup ? (
-          <div className="flex-1 flex items-center justify-center bg-slate-200 dark:bg-gray-700">
-            <div className="text-center">
-              <div className="text-7xl mb-4">💬</div>
+        {/* Messages */}
+        <section className="flex-1 overflow-y-auto scroll-smooth snap-y">
+          <MessageList
+            messages={currentConversation}
+            currentUserId={currentuser._id}
+            setReplyMessage={setReplyMessage}
+            handleEditMessage={editMessage}
+            handleDeleteMessage={deleteMessage}
+            reactToMessage={reactToMessage}
+          />
+        </section>
 
-              <h1 className="text-3xl font-bold text-slate-700 dark:text-slate-100">
-                Welcome to ChatApp
-              </h1>
+        {/* Input */}
+        <footer className="shrink-0 bg-white dark:bg-gray-800 border-t border-slate-200 dark:border-gray-700">
+          <MessageInput
+            input={input}
+            setInput={setInput}
+            sendMessage={sendMessage}
+            replyMessage={replyMessage}
+            setReplyMessage={setReplyMessage}
+            socket={socket}
+            currentUser={currentuser}
+            selectedUser={selectedUser}
+            selectedGroup={selectedGroup}
+          />
+        </footer>
+      </>
+    )}
+  </main>
+</div>
 
-              <p className="text-slate-500 mt-2 dark:text-slate-200">
-                Select a user or group to start chatting
-              </p>
-            </div>
-          </div>
-        ) : (
-          <>
-            {/* Header */}
-            <div className="bg-white shadow-sm border-b border-slate-200">
-              <div className="flex items-center">
-                {/* Mobile Back Button */}
-
-
-                <div className="flex-1">
-                  <ChatHeader
-                    selectedUser={selectedUser}
-                    selectedGroup={selectedGroup}
-                    onlineUsers={onlineUsers}
-                    typing={typing}
-                    groupTyping={groupTyping}
-                    handleBack={handleBack}
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Messages */}
-            <div className="flex-1 min-h-0">
-              <MessageList
-                messages={currentConversation}
-                currentUserId={currentuser._id}
-                setReplyMessage={setReplyMessage}
-                handleEditMessage={editMessage}
-                handleDeleteMessage={deleteMessage}
-                reactToMessage={reactToMessage}
-
-              />
-            </div>
-
-            {/* Input */}
-           <div className="shrink-0 bg-white border-t border-slate-200">
-              <MessageInput
-                input={input}
-                setInput={setInput}
-                sendMessage={sendMessage}
-                replyMessage={replyMessage}
-                setReplyMessage={setReplyMessage}
-
-                socket={socket}
-                currentUser={currentuser}
-                selectedUser={selectedUser}
-                selectedGroup={selectedGroup}
-              />
-            </div>
-          </>
-        )}
-      </div>
-    </div>
   );
 };
 
