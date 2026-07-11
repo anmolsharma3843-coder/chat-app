@@ -122,19 +122,7 @@ const ChatApp = ({ user }) => {
     ) : (
       <>
         {/* Header */}
-        <header
-className="
-h-16
-flex
-items-center
-bg-white
-dark:bg-gray-800
-border-b
-border-slate-200
-dark:border-gray-700
-shadow-sm
-shrink-0
-"
+        <header className=" h-16 flex items-center bg-white dark:bg-gray-800 border-b border-slate-200 dark:border-gray-700 shadow-sm shrink-0 w-full"
 >
           <ChatHeader
             selectedUser={selectedUser}
