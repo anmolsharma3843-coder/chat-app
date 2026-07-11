@@ -66,7 +66,7 @@ useEffect(() => {
       {/* User Header */}
      <div className="px-4 py-4 border-b border-slate-200 dark:border-slate-500">
   <div className="flex justify-between items-center">
-   <h1 className="text-xl text-green-500 font-bold">WhatsApp</h1>
+   <h1 className="text-xl text-green-500 font-bold">ChatNest</h1>
     <div
       onClick={() => setShowProfile(true)}
       className="flex items-center gap-3 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 p-2 rounded-xl transition"

@@ -18,7 +18,7 @@ const ChatHeader = ({
     );
 
   return (
-    <div className="bg-white px-6 py-4 border-b border-slate-200 flex items-center justify-between shadow-sm dark:bg-gray-700">
+   <div className=" w-full h-full bg-white dark:bg-gray-700 px-4 md:px-6 flex items-center justify-between border-b border-slate-200 shadow-sm " >
       <div className="flex items-center gap-4">
         <button
           onClick={handleBack}
